@@ -1,0 +1,293 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Truth or Dare Game</title>
+  <style>
+    body {
+      font-family: 'Segoe UI', sans-serif;
+      background: #ffe6f0;
+      text-align: center;
+      padding: 20px;
+      color: #e91e63;
+    }
+
+    h1 {
+      font-size: 2.5rem;
+    }
+
+    .button-group {
+      margin: 20px 0;
+    }
+
+    button {
+      padding: 12px 20px;
+      font-size: 1.2rem;
+      margin: 10px;
+      border: none;
+      border-radius: 10px;
+      cursor: pointer;
+      background-color: #e91e63;
+      color: white;
+      transition: background 0.3s;
+    }
+
+    button:hover {
+      background-color: #d81b60;
+    }
+
+    .box {
+      width: 80%;
+      max-width: 500px;
+      height: 200px;
+      margin: 30px auto;
+      background-color: white;
+      border-radius: 20px;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      font-size: 2rem;
+      font-weight: bold;
+      box-shadow: 0 10px 20px rgba(0,0,0,0.1);
+      cursor: pointer;
+      padding: 20px;
+    }
+  </style>
+</head>
+<body>
+
+  <h1>Truth or Dare Game</h1>
+  <div class="button-group">
+    <button onclick="startGame('truth')">Truth</button>
+    <button onclick="startGame('dare')">Dare</button>
+  </div>
+
+  <div class="box" onclick="stopGame()">Click to Stop</div>
+
+  <script>
+    const truthOptions = [
+      "What was the worst encounter you had with a police officer?🙏",
+      "What is the most embarrassing thing your parents have caught you doing?🌮", 
+      "How can I make sex more enjoyable for you?👯‍♂️",
+      "Would you ever want to play dirty with me?🐞",
+      "Have you ever been seduced by someone?🧞‍♂️",
+      "What is something that people think you would never do but you have?🐍🤮",
+      "If you are still a virgin, how would you demand it?👀",
+      "What would you do if I come to you naked?🏴‍☠️",
+      "Who here would you most like to make out with?🎀",
+      "Do u prefer skin to skin or condom?😶",
+      "How long can u last in bed?👨‍🦲",
+      "Who here has the nicest butt?🍕",
+      "Do you think you’re a good kisser?🎍",
+      "What is your deepest darkest fear?🕹",
+      "what is your biggest regret?🕳",
+      "Have you ever cheated or been cheated on?🥨",
+      "What is the most childish thing you still do?💅",
+      "Who was the last person you licked?👏",
+      "What do u feel like when sex is on your mind?👩‍🦳",
+      "Do u discuss your relationship with your friends?👼",
+      "How long can u last in bed?👨‍🦲",
+      "When was the most inappropriate time you farted?🤩",
+      "Do you like being lick on your pussy while sex is going on?🙇‍♂",
+      "Which is your favorite kind of sex: soft, slow, and sweet or aggressive, fast, and feisty?💁‍",
+      "Have you ever kissed a girl?🎹",
+      "Wanna fuck my ass or pussy?🎟",
+      "How would you start with me if I was in your bed right now?🎠",
+      "How do you like to be touched by me?✨",
+      "What do you think is the sexiest thing about my body?🎊",
+      "How many minutes should my d*k or p**y should stay inside yours without removing it?⛸",
+      "Do you prefer to take the lead for sex?🗃",
+      "Which part of guys body you want to touch or feel?⚰",
+      "Do you like experimenting with different positions, or your favorite?📯",
+      "Is laughing in sex okay, or it has to be serious?🎐",
+      "What part of my body would you want me to tattoo?👩🏽‍🤝‍👩🏼",
+      "Would you prefer my dick deep inside your pussy or at the bottom?👨‍❤️‍💋‍👨",
+      "are you a shy guy, sexually?🍟",
+      "Have you ever been hot for a teacher?🏵",
+      "What secret about yourself did you tell someone in confidence and then they told a lot of other people?🚒",
+      "Are you confident about showing your naked body?🗽🗾",
+      "If you could choose anything on my body to see right now what would it be?🌗",
+      "What is the one thing you can never resist and that instantly gets you wet?🏊‍♂️",
+      "Are u a dick sucker?💪🦵",
+      "Who is the person you most regret kissing?🤸‍♀️",
+      "What lie have you told that hurt someone?👩‍🔧",
+      "At wat age do u plan to get married?😀",
+      "What is the naughtiest thing you've done in public?🙂",
+      "How would you feel if someone sends u porn?😫",
+      "Would you like me to be the person that will re-dis virgins you?😋",
+      "Have someone ever make an attempt to have sex with you?😘",
+      "Are you a jealous person?🥰",
+      "When was the last time you peed in bed?🐾",
+      "How many sex position do you know?😴",
+      "Name the sex position you would like us to try?💔",
+      "What part of your body will you let me touch?☮",
+      "Who have you loved but they didn't love you back?🛄",
+      "is there anything you’re too nervous to tell me in person?✳",
+      "Do you like your boobs being pressed?💱",
+      "Do you ever felt hot in shower while rubbing your body?💙",
+      "What should a guy do to make you wet?💛💚",
+      "What are your top three turn-ons?🍑🍆",
+      "What’s your secret move to turn a guy or girl on?🥫",
+      "What is the difference to you between sex and making love?☣",
+      "Which position is your favorite for us?🕉",
+      "How likely will you allow me to touch you down there?💮",
+      "How will you take it if I put my hand underneath your shirt right now?👔",
+      "How much do you like dirty talk?🥼",
+      "What is your favorite thing that your boyfriend or girlfriend does?🎰",
+      "If I allowed you to do anything to me what would you do?🧸",
+      "Do you think it’s possible to have a friend with benefits?🎨",
+      "How many times a week would you want to have sex?🪔",
+      "If u were asked to give me a sex position, were will that be p***y or ass?🍑",
+      "If I was with you, which part of my body would you want to lick first?🙊",
+      "If you could have sex in any location in the world, where would it be?🧙‍♂️",
+      "where do you love to have sex?🧬",
+      "What is your deepest darkest fear?🥩", 
+      "What's a secret you never told anyone? 🤫",
+      "What's your weirdest dream? 🛌",
+      "Have you ever had a crush on a teacher? 👩‍🏫",
+      "What's your most embarrassing moment? 😳",
+      "Who do you like right now? 😉",
+      "What's something you regret? 🥺"
+    ];
+
+    const dareOptions = [
+      "Can I watch you play with your stuff?👲",
+     "stare at my butt or chest?👩‍🦲",
+     "send naked picture of your self?🤴",
+     "make out with another girl while I watch?❤",
+     "have sex with me while somebody is watching us?🐳",
+     "take my panties off with just your teeth?😈",
+     "Where on your body would you like me to massage?👻",
+     "prank your mom that you are pregnanet?🎠",
+     "mention all the sex position you know?🎇",
+     "Spank, squeeze, and pinch your partner’s butt?🖼",
+     "send a flirting text to someone close to you?🧶",
+     "What color of underwear do you think I am wearing right now?🍜",
+     "Name three things you will like to do during sex?😙",
+     "Where, and how, can I touch you that will turn you on?🦄",
+     "Attempt to do a magic trick?😎",
+     "Kiss the person to your left?🤨",
+     "Talk in an accent for the next 3 rounds?🐔",
+     "show the most embarrassing photo you have on your phone?🥳",
+     "tell us the most embarrassing nickname you have ever had?🥳",
+     "Tell me about the last time someone unexpectedly walked in on you while you were naked?🤣",
+     "What is the weird thing you have had in your mouth?🥰",
+     "What terrible thing have you done that you lied to cover up?🍘",
+     "lick my ears?🍤",
+     "Name flirty text messages you’ve sent or received?🍗",
+     "Name place you’d like to have a quickie?🚡",
+     "Name things that always get you in the mood for intimacy?🏔",
+     "intimate surprises or gestures you’ve planned for your partner?🌡",
+     "enticing ways you like to initiate foreplay?💤",
+     "take me out on a dinner date?♻",
+     "sexy songs that set the mood for you?🏎",
+     "moan like how i will in bed?🚖",
+     "do you prefer to sleep naked or in pajamas?☸",
+     "which music do you put on music when making love?💌",
+     "Pass a candy to her using just the lips?💨",
+     "Kiss each other for a whole minute?💖",
+     "Give the her a lap dance?👶",
+     "Unhook your girlfriend’s bra and take it off her body using just one hand?⛷",
+     "Make out with each other with the clothes on?😈",
+     "Eat a melting piece of chocolate off your girlfriend’s boobs?🤐",
+     "Hug each other topless?🐱‍👤",
+     "Thigh massage?💀",
+     "kiss her on the thigh?😛",
+     "moves your hand or a feather all over the person’s body?🦠",
+     "Find your girlfriend’s nipple with your teeth?🦷",
+     "Place an ice cube on the girl’s belly button until it melts?🏂",
+     "Slip your hand into your his or her jeans/pants and keep it busy for a whole minute?🧜‍♀️",
+     "Suck his/her fingers?🎶",
+     "Lift your girlfriend’s shirt up from the back all the way to the collar using just your teeth?🌳",
+     "blindfolded partner should kiss three specific body parts chosen by the other person?☃",
+     "Streak around the house?🔥",
+     "Act out the last porn scene you watched?🍔",
+     "Recreate a summary of the first time you had sex?🥒",
+     "Look up a sex position you want to try and show your partner?💧",
+     "Pull up your porn history and allow the person to take a look at it?❄",
+     "Make your O-face and let your partner take a picture?🌈",
+      "eat food off another player’s naked stomach?⚔",
+      "have your way with her for the next 30 minutes?🎡",
+      " Lick her neck for maybe two minutes?💞",
+      "get naked?🔞",
+      "put on a naughty show?💦",
+      "finger her for/hold her dick for 2 minute?🧘‍♀️",
+      "If you could have a threesome with me and one other person you know, who would it be?🙈",
+      "what ways you like to express your love to your partner?🍗",
+      "dance moves you’d perform for your partner?🌻",
+      "let someone give you a playful slap on your butt?⚜",
+      "share the naughties dream you've ever had?🔅",
+      "share your favorite type of foreplay?💥",
+      "let someone give you a compliment and you have to blush?🍑",
+      "let someone choose a body part for you to kiss?🍆",
+      "share your idea of a perfect romantic?🩸",
+      "let someone take a picture of you in a funny pose?🎃",
+      "share your favorite position and why?🍕",
+      "sing a song in a sexy way?😜",
+      "let write a flirt message on your arm?🥽",
+      "do a seductive pose for 1 minute?🧎‍",
+      "do you best fake moan?😁",
+      "send a voice note saying im thinking about?👅",
+      "do your sexiest walk across the room?🚶‍♀️",
+      "say im sexy and i konw it in your best voice?😎",
+      "let someone read a random message on your phone?🐲",
+      "spell a word with your body?🤔",
+      "send a voice note saying i have a secret crush on you?🕵️‍♀️",
+      "send a heart emoji to your ex?🙌",
+      "Give someone a hug! 🤗",
+      "Do 10 jumping jacks! ‍🏋️‍♀️",
+      "Sing a song out loud! 🎤",
+      "Dance for 10 seconds! 💃",
+      "Send a kiss emoji to someone! 😘",
+      "Do a silly face! 😜",
+      "Act like a monkey for 5 seconds! 🐒",
+      "Say something nice to the person next to you! 🌟",
+      "Take a sip of water! 💧",
+      "Pretend to be a cat! 🐱"
+    ];
+
+    let currentInterval;
+    let currentList = [];
+    let usedOptions = {
+      truth: [],
+      dare: []
+    };
+
+    function shuffle(array) {
+      return array.sort(() => Math.random() - 0.5);
+    }
+
+    function startGame(type) {
+      clearInterval(currentInterval);
+      currentList = shuffle([...((type === 'truth') ? truthOptions : dareOptions)]);
+
+      // Refill list if all used
+      if (usedOptions[type].length === currentList.length) {
+        usedOptions[type] = [];
+      }
+
+      const availableOptions = currentList.filter(item => !usedOptions[type].includes(item));
+      let index = 0;
+
+      currentInterval = setInterval(() => {
+        document.querySelector('.box').innerText = availableOptions[index];
+        index = (index + 1) % availableOptions.length;
+      }, 100);
+
+      document.querySelector('.box').dataset.type = type;
+      document.querySelector('.box').dataset.running = "true";
+    }
+
+    function stopGame() {
+      if (document.querySelector('.box').dataset.running !== "true") return;
+
+      clearInterval(currentInterval);
+      const finalText = document.querySelector('.box').innerText;
+      const type = document.querySelector('.box').dataset.type;
+      usedOptions[type].push(finalText);
+      document.querySelector('.box').dataset.running = "false";
+    }
+  </script>
+</body>
+</html>
